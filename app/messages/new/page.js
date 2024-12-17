@@ -1,17 +1,17 @@
-import { redirect } from 'next/navigation';
+import { redirect } from "next/navigation";
 
-import { addMessage } from '@/lib/messages';
-import { revalidatePath, revalidateTag } from 'next/cache';
+import { addMessage } from "@/lib/messages";
+// import { revalidatePath, revalidateTag } from 'next/cache';
 
 export default function NewMessagePage() {
   async function createMessage(formData) {
-    'use server';
+    "use server";
 
-    const message = formData.get('message');
+    const message = formData.get("message");
     addMessage(message);
     // revalidatePath('/messages');
-    revalidateTag('msg');
-    redirect('/messages');
+    // revalidateTag('msg');
+    redirect("/messages");
   }
 
   return (
