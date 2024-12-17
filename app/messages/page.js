@@ -1,11 +1,14 @@
-import Messages from '@/components/messages';
+// import { unstable_noStore } from "next/cache";
+
+import Messages from "@/components/messages";
+
+// Set caching for the whole page:
+// export const revalidate = 5; // seconds to revalidate (time data is cached)
+// export const dynamic = "force-dynamic"; // force dynamic rendering => always refresh data
 
 export default async function MessagesPage() {
-  const response = await fetch('http://localhost:8080/messages', {
-    headers: {
-      'X-ID': 'page',
-    },
-  });
+//  unstable_noStore();
+  const response = await fetch("http://localhost:8080/messages", { next: {tags: ['msg']} });
   const messages = await response.json();
 
   if (!messages || messages.length === 0) {
